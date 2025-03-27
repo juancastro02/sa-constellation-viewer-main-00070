@@ -35,33 +35,38 @@
     --radius: 0.5rem;
   }
 
+  .bg-primary {
+    background-color: lightgray !important;
+    color: black !important;
+  }
+
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%; 
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 9%; 
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%; 
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 0 0% 9%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
+    --border: 0 0% 15%; 
+    --input: 0 0% 9%;
     --ring: 224.3 76.3% 48%;
   }
 }
@@ -70,22 +75,36 @@
   * {
     @apply border-border;
   }
-  body {
+  
+  html, body {
     @apply bg-background text-foreground;
+    min-height: 100%;
+    height: 100%;
+  }
+  
+  #__next, [data-nextjs-root] {
+    @apply bg-background;
+    min-height: 100%;
+    height: 100%;
+  }
+  
+  dialog, [role="dialog"] {
+    @apply bg-background;
   }
 }
 
-/* Fix for button text in dark mode */
+button, 
+a[role="button"],
+.button,
+input[type="submit"],
+input[type="button"] {
+  @apply transition-colors;
+}
+
 .dark button {
   @apply text-primary-foreground;
 }
 
-/* Fix for alert text in dark mode */
-.dark .alert-destructive {
-  @apply text-white;
-}
-
-/* Improve error message visibility in light mode */
 .bg-destructive\/25 {
   background-color: rgba(239, 68, 68, 0.25);
 }
@@ -94,7 +113,6 @@
   color: rgb(185, 28, 28);
 }
 
-/* Keep dark mode styling */
 .dark .bg-destructive\/15 {
   background-color: rgba(239, 68, 68, 0.15);
 }
@@ -103,7 +121,6 @@
   color: rgb(254, 202, 202);
 }
 
-/* Improve error message visibility in dark mode */
 .dark .bg-destructive\/30 {
   background-color: rgba(239, 68, 68, 0.3);
 }
@@ -112,7 +129,53 @@
   border-color: rgba(239, 68, 68, 0.5);
 }
 
-.dark .text-destructive-foreground {
-  color: rgb(254, 202, 202);
+.dark {
+  color-scheme: dark;
 }
 
+::selection {
+  @apply bg-primary/20 text-foreground;
+}
+
+.dark ::selection {
+  background-color: rgba(56, 139, 253, 0.4);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-accent/50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/30;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: hsl(0 0% 5%);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: hsl(0 0% 15%);
+  border-radius: 5px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: hsl(0 0% 20%);
+}
+
+.dark .bg-background,
+.dark [class*="bg-background"] {
+  background-color: hsl(0 0% 0%);
+}
+
+* {
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
